@@ -7,7 +7,12 @@
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 
-# An example controller showing a sample home page
+# Navigation Controllers
 GET     /                           controllers.NavigationController.index
 
-GET     /analyze                           controllers.NavigationController.analyze
+GET     /analyze                    controllers.NavigationController.analyze
+
+
+#REST data providers
+
+GET 	/tweetssentiment			controllers.DataController.getTweetsForGivenKeyword(keyword : String)

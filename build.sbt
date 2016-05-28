@@ -11,3 +11,6 @@ libraryDependencies ++= Seq(
   cache,
   javaWs
 )
+
+//Additional JSON processing libraries
+libraryDependencies += "com.google.code.gson" % "gson" % "2.6.2"
