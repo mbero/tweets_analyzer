@@ -2,8 +2,6 @@ package services;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,7 +16,11 @@ public class AnalyzedTweetsService {
 	public AnalyzedTweetsService() {
 	}
 
-	// TEST implementation (will be filled with KAFKA results)
+	/**
+	 * Get all Tweets from DB and return them as list for drawing timeline
+	 * @param keyword
+	 * @return
+	 */
 	public List<Tweet> getTweetsForGivenKeyword(String keyword) {
 
 		List<Tweet> tweetsInformationsList = new ArrayList<Tweet>();
@@ -42,7 +44,7 @@ public class AnalyzedTweetsService {
 			String output = gson.toJson(collection);
 			jsonNode = mapper.readTree(output);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
+			//("JsonProcessingException" ,e.getCause());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

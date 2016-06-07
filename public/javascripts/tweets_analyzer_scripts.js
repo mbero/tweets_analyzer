@@ -15,7 +15,7 @@ function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
 		 	for(var i=0; i<response.length; i++)
 		 	{
 		 		var currentResponseObject = response[i];
-		 		var currentDataSetObject = new DataSetObject(i, currentResponseObject.candidate, "2015-05-05");
+		 		var currentDataSetObject = new DataSetObject(i, currentResponseObject.candidate, currentResponseObject.time);
 		 		responseTransformedIntoVisDataSetArray.push(currentDataSetObject);
 		 	}
 		 	//var items = new vis.DataSet([]);
