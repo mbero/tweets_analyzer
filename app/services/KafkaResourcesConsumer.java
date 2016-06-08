@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import kafka.consumer.Consumer;
@@ -13,6 +14,7 @@ import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
+import models.Tweet;
 
 
 /**
@@ -23,7 +25,8 @@ public class KafkaResourcesConsumer extends  Thread {
     final static String clientId = "SimpleConsumerDemoClient";
     final static String TOPIC = "test";
     ConsumerConnector consumerConnector;
-
+    @Inject
+    TweetsManager tweetsManager;
 
     public static void main(String[] argv) throws UnsupportedEncodingException {
         KafkaResourcesConsumer helloKafkaConsumer = new KafkaResourcesConsumer();
@@ -53,15 +56,17 @@ public class KafkaResourcesConsumer extends  Thread {
         int counter=0;
         while(it.hasNext())
         {
-        	List<String> arrayOfMessagesToReadFromDB = new ArrayList<String>();
+        	List<Tweet> arrayOfMessagesToReadFromDB = new ArrayList<Tweet>();
         	if(counter<10)
         	{
-        		arrayOfMessagesToReadFromDB.add(new String(it.next().message()));
+        		Tweet currentTweet = new Tweet(new String(it.next().message()), "2015-05-04", 1);
+        		//arrayOfMessagesToReadFromDB.add(new String(it.next().message()));
         		counter+=1;
         	}
         	else
         	{
         		//save to db package of ten messages
+        		tweetsManager.saveTweetsToDB(arrayOfMessagesToReadFromDB);
         		counter=0;
         	}
         }
