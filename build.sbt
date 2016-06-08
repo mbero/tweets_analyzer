@@ -6,9 +6,9 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 //lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 //Repositories
-resolvers += (
-    "sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
-)
+resolvers += "sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+resolvers +=  "Apache repo" at "https://repository.apache.org/content/repositories/releases"
+
 
 libraryDependencies ++= Seq(
   javaJdbc,
@@ -20,7 +20,8 @@ libraryDependencies ++= Seq(
 libraryDependencies += "com.google.code.gson" % "gson" % "2.6.2"
 
 //Kafka consumer
-libraryDependencies += "org.apache.kafka" % "kafka_2.9.2" % "0.8.1.1" exclude("javax.jms", "jms") exclude("com.sun.jdmk", "jmxtools") exclude("com.sun.jmx", "jmxri")
+//libraryDependencies += "org.apache.kafka" % "kafka_2.9.2" % "0.8.1.1" exclude("javax.jms", "jms") exclude("com.sun.jdmk", "jmxtools") exclude("com.sun.jmx", "jmxri")
+libraryDependencies += "org.apache.kafka" % "kafka_2.10" % "0.10.0.0" exclude("javax.jms", "jms") exclude("com.sun.jdmk", "jmxtools") exclude("com.sun.jmx", "jmxri")
 
 // http://mvnrepository.com/artifact/org.scala-lang/scala-library
 libraryDependencies += "org.scala-lang" % "scala-library" % "2.11.7"
