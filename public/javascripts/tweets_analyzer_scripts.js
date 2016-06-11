@@ -1,10 +1,26 @@
+var currentlySelectedCandidate;
 $( document ).ready(function() {
     if (document.location.pathname.indexOf("analyze")>-1) {
     	
-    	getDataAboutAnalyzedTweetsForGivenKeyword('CLINTON');
+    	getDataAboutAnalyzedTweetsForGivenKeyword('TRUMP');
+    	getDataAboutAnalyzedTweetsForGivenKeyword2('CLINTON');
+    	//currentlySelectedCandidate='TRUMP';
     }
 });
 
+function switchCandidate()
+{
+	if(currentlySelectedCandidate==='TRUMP')
+	{
+		 getDataAboutAnalyzedTweetsForGivenKeyword('CLINTON');
+		 $("#candidate_name").html("'CLINTON' tweets");
+	}
+	if(currentlySelectedCandidate==='CLINTON')
+	{
+		 getDataAboutAnalyzedTweetsForGivenKeyword('TRUMP');
+		 $("#candidate_name").html("'TRUMP' tweets");
+	}
+}
 //FOR GRAPH 2D
 function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
 {
@@ -32,6 +48,34 @@ function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
 	 });
 	 
 }
+
+function getDataAboutAnalyzedTweetsForGivenKeyword2(keyword)
+{
+	 var tweetsDataProvider = new AnalyzedTweetsDataProvider();
+	 var resultsForGivenKeywordPromise = tweetsDataProvider.getResultsForGivenKeywordPromise(keyword);
+	 var items = new Array();
+	 resultsForGivenKeywordPromise.done(function(response)
+	 {
+			for(var i=0; i<response.length; i++)
+		 	{
+				var currentResponseObjectDate = (new Date(Number(response[i].time))).toLocaleString();
+				var currentResponseObjectSentiment = response[i].sentiment;
+				var graphPointObject = new GraphPointObject(currentResponseObjectDate, currentResponseObjectSentiment);
+				items.push(graphPointObject);
+		 	}
+			 var startDate = (new Date(Number(response[0].time))).toLocaleString();
+			 var endDate = (new Date(Number(response[response.length-1].time))).toLocaleString();
+			 var dataset = new vis.DataSet(items);
+			  var options = {
+			    start: startDate,
+			    end: endDate
+			  };
+			  var container = document.getElementById('visualization2');
+			  var graph2d = new vis.Graph2d(container, dataset, options)
+	 });
+	 
+}
+
 function GraphPointObject(x,y)
 {
 	this.x=x;

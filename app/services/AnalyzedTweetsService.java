@@ -27,8 +27,15 @@ public class AnalyzedTweetsService {
 
 		TweetsDBService tweetsDBService = new TweetsDBService();
 		List<Tweet> allTweets = tweetsDBService.getAllObjectsFromDB();
-		
-		return allTweets;
+		List<Tweet> filteredTweets = new ArrayList<Tweet>();
+		for(Tweet currentTweet : allTweets)
+		{
+			if(currentTweet.getCandidate().equals(keyword))
+			{
+				filteredTweets.add(currentTweet);
+			}
+		}
+		return filteredTweets;
 	}
 
 	public JsonNode getResultCollectionAsJsonNode(Object collection) {
