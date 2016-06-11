@@ -26,6 +26,10 @@ libraryDependencies += "org.apache.kafka" % "kafka_2.10" % "0.10.0.0" exclude("j
 // http://mvnrepository.com/artifact/org.scala-lang/scala-library
 libraryDependencies += "org.scala-lang" % "scala-library" % "2.11.7"
 
+// http://mvnrepository.com/artifact/org.postgresql/postgresql
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1200-jdbc41"
+
+
 //EBEAN
 //libraryDependencies += "org.avaje.ebeanorm" % "avaje-ebeanorm" % "7.1.1"
 //libraryDependencies += "org.avaje" % "avaje-agentloader" % "2.1.2"

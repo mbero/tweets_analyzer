@@ -2,13 +2,13 @@ package controllers;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.inject.Inject;
-
 import models.Tweet;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.AnalyzedTweetsService;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Inject;
 
 /**
  * This controller is responsible for getting data from Apache Kafka instance

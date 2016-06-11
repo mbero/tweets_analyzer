@@ -1,10 +1,44 @@
 $( document ).ready(function() {
     if (document.location.pathname.indexOf("analyze")>-1) {
     	
-    	getDataAboutAnalyzedTweetsForGivenKeyword('TRUMP');
+    	getDataAboutAnalyzedTweetsForGivenKeyword('CLINTON');
     }
 });
 
+//FOR GRAPH 2D
+function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
+{
+	 var tweetsDataProvider = new AnalyzedTweetsDataProvider();
+	 var resultsForGivenKeywordPromise = tweetsDataProvider.getResultsForGivenKeywordPromise(keyword);
+	 var items = new Array();
+	 resultsForGivenKeywordPromise.done(function(response)
+	 {
+			for(var i=0; i<response.length; i++)
+		 	{
+				var currentResponseObjectDate = (new Date(Number(response[i].time))).toLocaleString();
+				var currentResponseObjectSentiment = response[i].sentiment;
+				var graphPointObject = new GraphPointObject(currentResponseObjectDate, currentResponseObjectSentiment);
+				items.push(graphPointObject);
+		 	}
+			 var startDate = (new Date(Number(response[0].time))).toLocaleString();
+			 var endDate = (new Date(Number(response[response.length-1].time))).toLocaleString();
+			 var dataset = new vis.DataSet(items);
+			  var options = {
+			    start: startDate,
+			    end: endDate
+			  };
+			  var container = document.getElementById('visualization');
+			  var graph2d = new vis.Graph2d(container, dataset, options)
+	 });
+	 
+}
+function GraphPointObject(x,y)
+{
+	this.x=x;
+	this.y=y;
+}
+//FOR TIMELINE
+/* 
 function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
 {
 	 var tweetsDataProvider = new AnalyzedTweetsDataProvider();
@@ -22,7 +56,11 @@ function getDataAboutAnalyzedTweetsForGivenKeyword(keyword)
 	    	constructTimeLineForGivenData(responseTransformedIntoVisDataSetArray);
 	 });
 }
+*/
 
+
+
+//FOR TIMELINE
 function DataSetObject(id,content,start)
 {
 	this.id=id;

@@ -5,24 +5,14 @@ package models;
  * @author Marcin
  *
  */
-//@Entity
-//extends Model
+
 public class Tweet {
 
-	//@Id
-	//@Constraints.Min(10)
-	private Integer id;
+
+	
 	private String candidate;
 	private String time;
-	private Integer sentiment; //0 lub 1
-	
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	private String sentiment;
 	public String getCandidate() {
 		return candidate;
 	}
@@ -35,18 +25,23 @@ public class Tweet {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public Integer getSentiment() {
+	public String getSentiment() {
 		return sentiment;
 	}
-	public void setSentiment(Integer sentiment) {
+	public void setSentiment(String sentiment) {
 		this.sentiment = sentiment;
 	}
-	public Tweet(String candidate, String time, Integer sentiment) {
+	public Tweet(String candidate, String time, String sentiment) {
 		super();
 		this.candidate = candidate;
 		this.time = time;
 		this.sentiment = sentiment;
 	}
+	
+	
+
+	
+	
 	
 	
 	
